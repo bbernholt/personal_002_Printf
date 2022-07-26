@@ -6,7 +6,7 @@
 /*   By: bbernhol <bbernhol@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:20:51 by bbernhol          #+#    #+#             */
-/*   Updated: 2022/07/26 21:09:41 by bbernhol         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:46:16 by bbernhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,24 @@ static void ft_matches(const char *str, va_list args)
 	}
 
 	//s -> Prints a string (as defined by the common C convention).
+	if (*str == 'i')
+	{
+		ft_putstr_fd(va_arg(args, char *s), 1);
+	}
 
 	//p -> The void * pointer argument has to be printed in hexadecimal format.
 
-	//d
+	//d -> Prints a decimal (base 10) number.
 	if (*str == 'd')
 	{
 		ft_putnbr_fd(va_arg(args, int), 1);
 	}
 	
 	//i -> Prints an integer in base 10.
+	if (*str == 'i')
+	{
+		ft_putnbr_fd(va_arg(args, int), 1);
+	}
 
 	//u -> Prints an unsigned decimal (base 10) number.
 
@@ -81,5 +89,8 @@ static void ft_matches(const char *str, va_list args)
 	//X -> Prints a number in hexadecimal (base 16) uppercase format.
 
 	//% -> Prints a percent sign.
-
+	if (*str == '%')
+	{
+		ft_putchar_fd('%', 1);
+	}
 }
