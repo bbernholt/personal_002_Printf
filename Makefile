@@ -4,7 +4,7 @@ CFLAGS=-Wall -Wextra -Werror
 
 NAME=libftprintf.a
 OBJECTS = $(CFILES:.c=.o)
-CFILES=ft_putchar_fd.c ft_putnbr_fd.c ft_putstr_fd.c
+CFILES=ft_putchar.c ft_putnbr.c ft_putstr.c ft_itoh.c ft_putunbr.c ft_printf.c
 
 all:$(NAME)
 

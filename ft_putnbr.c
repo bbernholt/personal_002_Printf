@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbernhol <bbernhol@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,41 +12,58 @@
 
 #include "libft.h"
 
-static void	recursiv_print(int input, int fd);
+static int	recursiv_print(int input);
+static int	is_biggest_negativ(int input);
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr(int n)
 {
-	int		biggest_negative;
+	int		return_value;
 	char	buffer;
 
-	biggest_negative = -2147483648;
-	if (n == biggest_negative)
-		write (fd, "-2147483648", 11);
+	return_value = 0;
+	if (n == -2147483648)
+		return_value = is_biggest_negativ(11);
 	else
 	{
 		if (n < 0)
 		{
-			write (fd, "-", 1);
+			write (1, "-", 1);
 			n = n * -1;
+			return_value++;
 		}
 		if (n <= 9)
 		{
 			buffer = n + '0';
-			write (fd, &buffer, 1);
+			write (1, &buffer, 1);
+			return_value++;
 		}
 		else
-			recursiv_print(n, fd);
+			return_value += recursiv_print(n);
 	}
+	return (return_value);
 }
 
-static void	recursiv_print(int input, int fd)
+static int	recursiv_print(int input)
 {
 	char	buffer;
+	int		return_value;
 
+	return_value = 0;
 	if (input != 0)
 	{
-		recursiv_print(input / 10, fd);
+		return_value++;
+		return_value += recursiv_print(input / 10);
 		buffer = input % 10 + '0';
-		write (fd, &buffer, 1);
+		write (1, &buffer, 1);
 	}
+	return (return_value);
+}
+
+static int	is_biggest_negativ(int input)
+{
+	int	return_value;
+
+	return_value = 11;
+	write (1, "-2147483648", 11);
+	return (return_value);
 }
